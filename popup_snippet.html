@@ -1,0 +1,55 @@
+<!--
+  ICOLD 2027 Daejeon — Survey popup snippet
+  ------------------------------------------------
+  Paste this block just before the closing </body> tag of the
+  icold2027daejeon.com homepage (e.g. in WordPress: Appearance > Theme
+  File Editor > footer.php, or a "Custom HTML" widget/plugin).
+
+  Behavior:
+  - Shows once per browser session (won't re-appear every time the
+    visitor navigates the site, only once per visit / browser tab session).
+  - "Take the Survey" button links to the /survey page.
+  - Visitors can close it with the × button or by clicking outside the box.
+
+  If the survey is deployed at a different URL, update SURVEY_URL below.
+-->
+<div id="icold-survey-popup" style="display:none; position:fixed; inset:0; z-index:99999; background:rgba(8,27,52,0.55); align-items:center; justify-content:center; padding:16px;">
+  <div style="background:#fff; max-width:420px; width:100%; border-radius:14px; padding:28px 24px; text-align:center; box-shadow:0 20px 50px rgba(0,0,0,0.25); font-family:'Segoe UI', Arial, sans-serif; position:relative;">
+    <button id="icold-survey-popup-close" aria-label="Close" style="position:absolute; top:10px; right:12px; background:none; border:none; font-size:20px; line-height:1; cursor:pointer; color:#6b7684;">&times;</button>
+    <div style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:#d99a2b; font-weight:700; margin-bottom:8px;">ICOLD 2027 · Daejeon</div>
+    <h2 style="margin:0 0 10px; font-size:19px; color:#0b2545;">Quick Visitor Survey<br><span style="font-size:14px; font-weight:400; color:#334;">참가자 설문조사</span></h2>
+    <p style="font-size:13.5px; color:#555; margin:0 0 20px;">
+      Help us plan your ICOLD 2027 experience — takes about 1 minute.<br>
+      여러분의 ICOLD 2027 경험을 위해 약 1분만 시간을 내주세요.
+    </p>
+    <a href="https://icold2027daejeon.com/survey/" target="_blank" rel="noopener"
+       style="display:inline-block; background:#d99a2b; color:#1c2733; font-weight:700; padding:12px 30px; border-radius:999px; text-decoration:none; font-size:15px;">
+      Take the Survey / 바로가기
+    </a>
+  </div>
+</div>
+
+<script>
+(function () {
+  var STORAGE_KEY = 'icold2027_survey_popup_shown';
+  try {
+    if (sessionStorage.getItem(STORAGE_KEY)) { return; }
+  } catch (e) { /* storage unavailable, just show it once this page load */ }
+
+  var popup = document.getElementById('icold-survey-popup');
+  if (!popup) { return; }
+
+  function showPopup() {
+    popup.style.display = 'flex';
+    try { sessionStorage.setItem(STORAGE_KEY, '1'); } catch (e) {}
+  }
+  function hidePopup() { popup.style.display = 'none'; }
+
+  setTimeout(showPopup, 1200);
+
+  document.getElementById('icold-survey-popup-close').addEventListener('click', hidePopup);
+  popup.addEventListener('click', function (evt) {
+    if (evt.target === popup) { hidePopup(); }
+  });
+})();
+</script>

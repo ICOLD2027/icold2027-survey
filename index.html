@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ICOLD 2027 Daejeon Survey / 설문조사</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<input type="radio" id="lang-en" name="lang-toggle" checked>
+<input type="radio" id="lang-ko" name="lang-toggle">
+
+<header class="site-header">
+    <div class="eyebrow">ICOLD 2027 &middot; Daejeon, Korea</div>
+    <h1>
+        <span class="lang-en">Visitor Interest Survey</span>
+        <span class="lang-ko">참가자 관심사 설문조사</span>
+    </h1>
+    <p>
+        <span class="lang-en">Help us plan the ICOLD 2027 program and tours. This survey takes about 1 minute.</span>
+        <span class="lang-ko">ICOLD 2027 프로그램과 투어 기획을 위한 설문입니다. 약 1분 정도 소요됩니다.</span>
+    </p>
+    <div class="lang-switch">
+        <label for="lang-en">English</label>
+        <label for="lang-ko">한국어</label>
+    </div>
+</header>
+
+<main>
+    <div id="error-banner" class="error-banner" style="display:none;">
+        <span class="lang-en">Please check the highlighted questions below.</span>
+        <span class="lang-ko">아래 표시된 문항을 확인해 주세요.</span>
+    </div>
+
+    <form name="icold2027-survey" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field" id="survey-form">
+        <input type="hidden" name="form-name" value="icold2027-survey">
+        <p class="hp-field"><label>Don't fill this out if you're human: <input name="bot-field"></label></p>
+
+        <section class="question-card">
+            <span class="q-index">Q1</span>
+            <h2>
+                <span class="lang-en">If you visit Korea, where would you most like to go?</span>
+                <span class="lang-ko">한국을 방문한다면 가장 가보고 싶은 장소가 어디인가요?</span>
+            </h2>
+
+            <div class="rank-label"><span class="lang-en">1st choice</span><span class="lang-ko">1순위</span><span class="hint"> — <span class="lang-en">required</span><span class="lang-ko">필수</span></span></div>
+            <div class="option-grid">
+                <div class="option-card"><input type="radio" name="q1_1" id="q1_1_a" value="a" required><label for="q1_1_a"><img src="images/q1-a.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">A</span><span class="lang-en">Daejeon — Sungsimdang Bakery, Expo Science Park, Hanbat Arboretum (conference venue)</span><span class="lang-ko">대전 - 성심당, 엑스포 과학공원, 한밭수목원 (행사 개최지)</span></div></label></div>
+                <div class="option-card"><input type="radio" name="q1_1" id="q1_1_b" value="b"><label for="q1_1_b"><img src="images/q1-b.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">B</span><span class="lang-en">Seoul — Myeongdong, Gwanghwamun, Gyeongbokgung Palace, N Seoul Tower</span><span class="lang-ko">서울 - 명동, 광화문, 경복궁, N서울타워</span></div></label></div>
+                <div class="option-card"><input type="radio" name="q1_1" id="q1_1_c" value="c"><label for="q1_1_c"><img src="images/q1-c.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">C</span><span class="lang-en">Busan — Haeundae, Gwangalli, Gamcheon Culture Village</span><span class="lang-ko">부산 - 해운대, 광안리, 감천문화마을</span></div></label></div>
+                <div class="option-card"><input type="radio" name="q1_1" id="q1_1_d" value="d"><label for="q1_1_d"><img src="images/q1-d.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">D</span><span class="lang-en">Gyeonggi — Suwon Hwaseong Fortress, Everland</span><span class="lang-ko">경기 - 수원화성, 에버랜드</span></div></label></div>
+                <div class="option-card"><input type="radio" name="q1_1" id="q1_1_e" value="e"><label for="q1_1_e"><img src="images/q1-e.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">E</span><span class="lang-en">Jeju — Seongsan Ilchulbong, Olle Trail</span><span class="lang-ko">제주 - 성산일출봉, 올레길</span></div></label></div>
+                <div class="option-card"><input type="radio" name="q1_1" id="q1_1_f" value="f"><label for="q1_1_f"><img src="images/q1-f.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">F</span><span class="lang-en">Incheon — Songdo Central Park, Chinatown, Wolmido</span><span class="lang-ko">인천 - 송도 센트럴파크, 차이나타운, 월미도</span></div></label></div>
+            </div>
+
+            <div class="rank-label"><span class="lang-en">2nd choice</span><span class="lang-ko">2순위</span><span class="hint"> — <span class="lang-en">optional</span><span class="lang-ko">선택</span></span></div>
+            <div class="option-grid">
+                <div class="option-card"><input type="radio" name="q1_2" id="q1_2_a" value="a"><label for="q1_2_a"><img src="images/q1-a.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">A</span><span class="lang-en">Daejeon — Sungsimdang Bakery, Expo Science Park, Hanbat Arboretum (conference venue)</span><span class="lang-ko">대전 - 성심당, 엑스포 과학공원, 한밭수목원 (행사 개최지)</span></div></label></div>
+                <div class="option-card"><input type="radio" name="q1_2" id="q1_2_b" value="b"><label for="q1_2_b"><img src="images/q1-b.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">B</span><span class="lang-en">Seoul — Myeongdong, Gwanghwamun, Gyeongbokgung Palace, N Seoul Tower</span><span class="lang-ko">서울 - 명동, 광화문, 경복궁, N서울타워</span></div></label></div>
+                <div class="option-card"><input type="radio" name="q1_2" id="q1_2_c" value="c"><label for="q1_2_c"><img src="images/q1-c.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">C</span><span class="lang-en">Busan — Haeundae, Gwangalli, Gamcheon Culture Village</span><span class="lang-ko">부산 - 해운대, 광안리, 감천문화마을</span></div></label></div>
+                <div class="option-card"><input type="radio" name="q1_2" id="q1_2_d" value="d"><label for="q1_2_d"><img src="images/q1-d.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">D</span><span class="lang-en">Gyeonggi — Suwon Hwaseong Fortress, Everland</span><span class="lang-ko">경기 - 수원화성, 에버랜드</span></div></label></div>
+                <div class="option-card"><input type="radio" name="q1_2" id="q1_2_e" value="e"><label for="q1_2_e"><img src="images/q1-e.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">E</span><span class="lang-en">Jeju — Seongsan Ilchulbong, Olle Trail</span><span class="lang-ko">제주 - 성산일출봉, 올레길</span></div></label></div>
+                <div class="option-card"><input type="radio" name="q1_2" id="q1_2_f" value="f"><label for="q1_2_f"><img src="images/q1-f.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">F</span><span class="lang-en">Incheon — Songdo Central Park, Chinatown, Wolmido</span><span class="lang-ko">인천 - 송도 센트럴파크, 차이나타운, 월미도</span></div></label></div>
+            </div>
+
+            <div class="other-field">
+                <label for="q1_other"><span class="lang-en">Other (please specify)</span><span class="lang-ko">기타 (직접 입력)</span></label>
+                <input type="text" maxlength="200" name="q1_other" id="q1_other">
+            </div>
+        </section>
+
+        <section class="question-card">
+            <span class="q-index">Q2</span>
+            <h2>
+                <span class="lang-en">What Korean food would you most like to try?</span>
+                <span class="lang-ko">한국에서 가장 먹어보고 싶은 음식이 있다면 무엇인가요?</span>
+            </h2>
+
+            <div class="rank-label"><span class="lang-en">1st choice</span><span class="lang-ko">1순위</span><span class="hint"> — <span class="lang-en">required</span><span class="lang-ko">필수</span></span></div>
+            <div class="option-grid">
+                <div class="option-card"><input type="radio" name="q2_1" id="q2_1_a" value="a" required><label for="q2_1_a"><img src="images/q2-a.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">A</span><span class="lang-en">K-Chicken</span><span class="lang-ko">K-치킨</span></div></label></div>
+                <div class="option-card"><input type="radio" name="q2_1" id="q2_1_b" value="b"><label for="q2_1_b"><img src="images/q2-b.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">B</span><span class="lang-en">Kimchi</span><span class="lang-ko">김치</span></div></label></div>
+                <div class="option-card"><input type="radio" name="q2_1" id="q2_1_c" value="c"><label for="q2_1_c"><img src="images/q2-c.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">C</span><span class="lang-en">Bibimbap</span><span class="lang-ko">비빔밥</span></div></label></div>
+                <div class="option-card"><input type="radio" name="q2_1" id="q2_1_d" value="d"><label for="q2_1_d"><img src="images/q2-d.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">D</span><span class="lang-en">Bulgogi</span><span class="lang-ko">불고기</span></div></label></div>
+                <div class="option-card"><input type="radio" name="q2_1" id="q2_1_e" value="e"><label for="q2_1_e"><img src="images/q2-e.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">E</span><span class="lang-en">K-BBQ / Meat (Samgyeopsal, Galbi, etc.)</span><span class="lang-ko">K-바비큐/고기 (삼겹살, 갈비 등)</span></div></label></div>
+                <div class="option-card"><input type="radio" name="q2_1" id="q2_1_f" value="f"><label for="q2_1_f"><img src="images/q2-f.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">F</span><span class="lang-en">K-Dessert</span><span class="lang-ko">K-디저트</span></div></label></div>
+            </div>
+
+            <div class="rank-label"><span class="lang-en">2nd choice</span><span class="lang-ko">2순위</span><span class="hint"> — <span class="lang-en">optional</span><span class="lang-ko">선택</span></span></div>
+            <div class="option-grid">
+                <div class="option-card"><input type="radio" name="q2_2" id="q2_2_a" value="a"><label for="q2_2_a"><img src="images/q2-a.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">A</span><span class="lang-en">K-Chicken</span><span class="lang-ko">K-치킨</span></div></label></div>
+                <div class="option-card"><input type="radio" name="q2_2" id="q2_2_b" value="b"><label for="q2_2_b"><img src="images/q2-b.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">B</span><span class="lang-en">Kimchi</span><span class="lang-ko">김치</span></div></label></div>
+                <div class="option-card"><input type="radio" name="q2_2" id="q2_2_c" value="c"><label for="q2_2_c"><img src="images/q2-c.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">C</span><span class="lang-en">Bibimbap</span><span class="lang-ko">비빔밥</span></div></label></div>
+                <div class="option-card"><input type="radio" name="q2_2" id="q2_2_d" value="d"><label for="q2_2_d"><img src="images/q2-d.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">D</span><span class="lang-en">Bulgogi</span><span class="lang-ko">불고기</span></div></label></div>
+                <div class="option-card"><input type="radio" name="q2_2" id="q2_2_e" value="e"><label for="q2_2_e"><img src="images/q2-e.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">E</span><span class="lang-en">K-BBQ / Meat (Samgyeopsal, Galbi, etc.)</span><span class="lang-ko">K-바비큐/고기 (삼겹살, 갈비 등)</span></div></label></div>
+                <div class="option-card"><input type="radio" name="q2_2" id="q2_2_f" value="f"><label for="q2_2_f"><img src="images/q2-f.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">F</span><span class="lang-en">K-Dessert</span><span class="lang-ko">K-디저트</span></div></label></div>
+            </div>
+
+            <div class="other-field">
+                <label for="q2_other"><span class="lang-en">Other (please specify)</span><span class="lang-ko">기타 (직접 입력)</span></label>
+                <input type="text" maxlength="200" name="q2_other" id="q2_other">
+            </div>
+        </section>
+
+        <section class="question-card">
+            <span class="q-index">Q3</span>
+            <h2>
+                <span class="lang-en">What would you like to experience in Korea?</span>
+                <span class="lang-ko">한국에서 체험해보고 싶은 것은 무엇인가요?</span>
+            </h2>
+
+            <div class="rank-label"><span class="lang-en">1st choice</span><span class="lang-ko">1순위</span><span class="hint"> — <span class="lang-en">required</span><span class="lang-ko">필수</span></span></div>
+            <div class="option-grid">
+                <div class="option-card"><input type="radio" name="q3_1" id="q3_1_a" value="a" required><label for="q3_1_a"><img src="images/q3-a.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">A</span><span class="lang-en">Culinary (Korean restaurants, K-street food, Korean cooking classes, etc.)</span><span class="lang-ko">식도락 (한식 맛집, K-스트리트푸드, 한식 쿠킹 등)</span></div></label></div>
+                <div class="option-card"><input type="radio" name="q3_1" id="q3_1_b" value="b"><label for="q3_1_b"><img src="images/q3-b.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">B</span><span class="lang-en">Shopping / Lifestyle (K-beauty, jjimjilbang &amp; spa, personal color diagnosis, etc.)</span><span class="lang-ko">쇼핑/라이프스타일 (K-뷰티, 찜질방·스파, 퍼스널컬러 진단 등)</span></div></label></div>
+                <div class="option-card"><input type="radio" name="q3_1" id="q3_1_c" value="c"><label for="q3_1_c"><img src="images/q3-c.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">C</span><span class="lang-en">Nature / Healing (scenic nature, mountain trekking, walking tours, etc.)</span><span class="lang-ko">자연/힐링 (자연경관, 산·트레킹, 걷기여행 등)</span></div></label></div>
+                <div class="option-card"><input type="radio" name="q3_1" id="q3_1_d" value="d"><label for="q3_1_d"><img src="images/q3-d.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">D</span><span class="lang-en">Traditional Culture (palaces &amp; historic sites, hanbok experience, templestay, etc.)</span><span class="lang-ko">전통문화 (고궁·역사유적, 한복 체험, 템플스테이 등)</span></div></label></div>
+            </div>
+
+            <div class="rank-label"><span class="lang-en">2nd choice</span><span class="lang-ko">2순위</span><span class="hint"> — <span class="lang-en">optional</span><span class="lang-ko">선택</span></span></div>
+            <div class="option-grid">
+                <div class="option-card"><input type="radio" name="q3_2" id="q3_2_a" value="a"><label for="q3_2_a"><img src="images/q3-a.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">A</span><span class="lang-en">Culinary (Korean restaurants, K-street food, Korean cooking classes, etc.)</span><span class="lang-ko">식도락 (한식 맛집, K-스트리트푸드, 한식 쿠킹 등)</span></div></label></div>
+                <div class="option-card"><input type="radio" name="q3_2" id="q3_2_b" value="b"><label for="q3_2_b"><img src="images/q3-b.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">B</span><span class="lang-en">Shopping / Lifestyle (K-beauty, jjimjilbang &amp; spa, personal color diagnosis, etc.)</span><span class="lang-ko">쇼핑/라이프스타일 (K-뷰티, 찜질방·스파, 퍼스널컬러 진단 등)</span></div></label></div>
+                <div class="option-card"><input type="radio" name="q3_2" id="q3_2_c" value="c"><label for="q3_2_c"><img src="images/q3-c.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">C</span><span class="lang-en">Nature / Healing (scenic nature, mountain trekking, walking tours, etc.)</span><span class="lang-ko">자연/힐링 (자연경관, 산·트레킹, 걷기여행 등)</span></div></label></div>
+                <div class="option-card"><input type="radio" name="q3_2" id="q3_2_d" value="d"><label for="q3_2_d"><img src="images/q3-d.jpg" alt="" loading="lazy"><div class="option-thumb-text"><span class="option-code">D</span><span class="lang-en">Traditional Culture (palaces &amp; historic sites, hanbok experience, templestay, etc.)</span><span class="lang-ko">전통문화 (고궁·역사유적, 한복 체험, 템플스테이 등)</span></div></label></div>
+            </div>
+
+            <div class="other-field">
+                <label for="q3_other"><span class="lang-en">Other (please specify)</span><span class="lang-ko">기타 (직접 입력)</span></label>
+                <input type="text" maxlength="200" name="q3_other" id="q3_other">
+            </div>
+        </section>
+
+        <div class="submit-row">
+            <button type="submit" class="submit-btn">
+                <span class="lang-en">Submit</span>
+                <span class="lang-ko">제출하기</span>
+            </button>
+        </div>
+        <p class="footer-note">
+            <span class="lang-en">Your responses are anonymous and used only for ICOLD 2027 planning purposes.</span>
+            <span class="lang-ko">응답은 익명으로 수집되며 ICOLD 2027 행사 기획 목적으로만 사용됩니다.</span>
+        </p>
+    </form>
+</main>
+
+<script>
+(function () {
+    var enRadio = document.getElementById('lang-en');
+    var koRadio = document.getElementById('lang-ko');
+
+    // Prevent picking the same option for 1st and 2nd choice.
+    document.querySelectorAll('.question-card').forEach(function (card) {
+        var radios = card.querySelectorAll('input[type=radio]');
+        radios.forEach(function (r) {
+            r.addEventListener('change', function () {
+                var isFirst = /_1$/.test(r.name);
+                var pairName = isFirst ? r.name.replace(/_1$/, '_2') : r.name.replace(/_2$/, '_1');
+                var pairSame = card.querySelector('input[name="' + pairName + '"][value="' + r.value + '"]');
+                if (pairSame && pairSame.checked) {
+                    pairSame.checked = false;
+                }
+            });
+        });
+    });
+
+    // AJAX submit to Netlify Forms so we can show an inline error/success
+    // state without a full page navigation; falls back to a normal POST
+    // (which redirects to /thanks.html) if fetch/JS is unavailable.
+    var form = document.getElementById('survey-form');
+    var errorBanner = document.getElementById('error-banner');
+
+    function encode(data) {
+        return Object.keys(data).map(function (k) {
+            return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]);
+        }).join('&');
+    }
+
+    form.addEventListener('submit', function (evt) {
+        // Required-field / native validation (1st choice per question) still
+        // runs via the `required` attributes before this handler is reached.
+        var q1_1 = form.querySelector('[name="q1_1"]:checked');
+        var q1_2 = form.querySelector('[name="q1_2"]:checked');
+        var q2_1 = form.querySelector('[name="q2_1"]:checked');
+        var q2_2 = form.querySelector('[name="q2_2"]:checked');
+        var q3_1 = form.querySelector('[name="q3_1"]:checked');
+        var q3_2 = form.querySelector('[name="q3_2"]:checked');
+
+        if (!q1_1 || !q2_1 || !q3_1) {
+            evt.preventDefault();
+            errorBanner.style.display = 'block';
+            errorBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+        }
+        errorBanner.style.display = 'none';
+
+        evt.preventDefault();
+        var data = {
+            'form-name': 'icold2027-survey',
+            lang: koRadio.checked ? 'ko' : 'en',
+            q1_1: q1_1.value, q1_2: q1_2 ? q1_2.value : '', q1_other: form.q1_other.value,
+            q2_1: q2_1.value, q2_2: q2_2 ? q2_2.value : '', q2_other: form.q2_other.value,
+            q3_1: q3_1.value, q3_2: q3_2 ? q3_2.value : '', q3_other: form.q3_other.value
+        };
+
+        fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: encode(data)
+        }).then(function () {
+            window.location.href = '/thanks.html';
+        }).catch(function () {
+            // Fall back to a real form submission if the fetch failed.
+            form.submit();
+        });
+    });
+})();
+</script>
+</body>
+</html>

@@ -18,7 +18,7 @@ function survey_db(): PDO
     if ($databaseUrl) {
         $parts = parse_url($databaseUrl);
         $dsn = sprintf(
-            'pgsql:host=%s;port=%s;dbname=%s;sslmode=require',
+            'pgsql:host=%s;port=%s;dbname=%s;sslmode=prefer',
             $parts['host'],
             $parts['port'] ?? 5432,
             ltrim($parts['path'], '/')

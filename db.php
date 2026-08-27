@@ -6,6 +6,15 @@
 // container's local disk. Otherwise fall back to a local SQLite file,
 // for hosts that give this app persistent disk (typical shared PHP hosting).
 
+function survey_migrate(PDO $pdo): void
+{
+    try {
+        $pdo->exec('ALTER TABLE responses ADD COLUMN email TEXT');
+    } catch (PDOException $e) {
+        // Column already exists on a previously-created table -- fine.
+    }
+}
+
 function survey_db(): PDO
 {
     static $pdo = null;
@@ -36,6 +45,7 @@ function survey_db(): PDO
                 q3_choice1 TEXT, q3_choice2 TEXT, q3_other TEXT
             )'
         );
+        survey_migrate($pdo);
 
         return $pdo;
     }
@@ -59,6 +69,7 @@ function survey_db(): PDO
             q3_choice1 TEXT, q3_choice2 TEXT, q3_other TEXT
         )'
     );
+    survey_migrate($pdo);
 
     return $pdo;
 }

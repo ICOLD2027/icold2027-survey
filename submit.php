@@ -54,6 +54,14 @@ foreach ($SURVEY_QUESTIONS as $q) {
     $values["{$code}_other"] = $other;
 }
 
+$email = trim((string)($_POST['email'] ?? ''));
+if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $errors[] = [
+        'en' => 'Please enter a valid email address.',
+        'ko' => '올바른 이메일 주소를 입력해 주세요.',
+    ];
+}
+
 if (!empty($errors)) {
     render_survey_page($errors, $_POST);
     exit;
@@ -64,13 +72,14 @@ $lang = ($_POST['lang_used'] ?? 'en') === 'ko' ? 'ko' : 'en';
 $pdo = survey_db();
 $stmt = $pdo->prepare(
     'INSERT INTO responses
-        (created_at, lang, q1_choice1, q1_choice2, q1_other, q2_choice1, q2_choice2, q2_other, q3_choice1, q3_choice2, q3_other)
+        (created_at, lang, email, q1_choice1, q1_choice2, q1_other, q2_choice1, q2_choice2, q2_other, q3_choice1, q3_choice2, q3_other)
      VALUES
-        (:created_at, :lang, :q1c1, :q1c2, :q1o, :q2c1, :q2c2, :q2o, :q3c1, :q3c2, :q3o)'
+        (:created_at, :lang, :email, :q1c1, :q1c2, :q1o, :q2c1, :q2c2, :q2o, :q3c1, :q3c2, :q3o)'
 );
 $stmt->execute([
     ':created_at' => gmdate('Y-m-d H:i:s'),
     ':lang' => $lang,
+    ':email' => $email,
     ':q1c1' => $values['q1_1'], ':q1c2' => $values['q1_2'], ':q1o' => $values['q1_other'],
     ':q2c1' => $values['q2_1'], ':q2c2' => $values['q2_2'], ':q2o' => $values['q2_other'],
     ':q3c1' => $values['q3_1'], ':q3c2' => $values['q3_2'], ':q3o' => $values['q3_other'],

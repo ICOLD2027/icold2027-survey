@@ -113,6 +113,21 @@ function render_survey_page(array $errors, array $old): void
         </section>
         <?php endforeach; ?>
 
+        <section class="question-card">
+            <h2>
+                <span class="lang-en">Your email</span>
+                <span class="lang-ko">이메일</span>
+            </h2>
+            <div class="other-field">
+                <label for="email">
+                    <span class="lang-en">Email address</span>
+                    <span class="lang-ko">이메일 주소</span>
+                    <span class="hint"> — <span class="lang-en">required</span><span class="lang-ko">필수</span></span>
+                </label>
+                <input type="email" maxlength="200" name="email" id="email" required value="<?= $old_val('email') ?>">
+            </div>
+        </section>
+
         <div class="submit-row">
             <button type="submit" class="submit-btn">
                 <span class="lang-en">Submit</span>
@@ -120,8 +135,8 @@ function render_survey_page(array $errors, array $old): void
             </button>
         </div>
         <p class="footer-note">
-            <span class="lang-en">Your responses are anonymous and used only for ICOLD 2027 planning purposes.</span>
-            <span class="lang-ko">응답은 익명으로 수집되며 ICOLD 2027 행사 기획 목적으로만 사용됩니다.</span>
+            <span class="lang-en">Your responses are used only for ICOLD 2027 planning purposes and are not shared with third parties.</span>
+            <span class="lang-ko">응답은 ICOLD 2027 행사 기획 목적으로만 사용되며 제3자에게 제공되지 않습니다.</span>
         </p>
     </form>
 </main>

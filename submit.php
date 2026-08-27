@@ -62,6 +62,19 @@ if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     ];
 }
 
+$pdo = survey_db();
+
+if (empty($errors)) {
+    $dupCheck = $pdo->prepare('SELECT 1 FROM responses WHERE LOWER(email) = LOWER(:email) LIMIT 1');
+    $dupCheck->execute([':email' => $email]);
+    if ($dupCheck->fetchColumn()) {
+        $errors[] = [
+            'en' => 'This email address has already submitted a response. Each participant may only submit once.',
+            'ko' => '이미 제출된 이메일 주소입니다. 참가자당 1회만 제출할 수 있습니다.',
+        ];
+    }
+}
+
 if (!empty($errors)) {
     render_survey_page($errors, $_POST);
     exit;
@@ -69,21 +82,31 @@ if (!empty($errors)) {
 
 $lang = ($_POST['lang_used'] ?? 'en') === 'ko' ? 'ko' : 'en';
 
-$pdo = survey_db();
 $stmt = $pdo->prepare(
     'INSERT INTO responses
         (created_at, lang, email, q1_choice1, q1_choice2, q1_other, q2_choice1, q2_choice2, q2_other, q3_choice1, q3_choice2, q3_other)
      VALUES
         (:created_at, :lang, :email, :q1c1, :q1c2, :q1o, :q2c1, :q2c2, :q2o, :q3c1, :q3c2, :q3o)'
 );
-$stmt->execute([
-    ':created_at' => gmdate('Y-m-d H:i:s'),
-    ':lang' => $lang,
-    ':email' => $email,
-    ':q1c1' => $values['q1_1'], ':q1c2' => $values['q1_2'], ':q1o' => $values['q1_other'],
-    ':q2c1' => $values['q2_1'], ':q2c2' => $values['q2_2'], ':q2o' => $values['q2_other'],
-    ':q3c1' => $values['q3_1'], ':q3c2' => $values['q3_2'], ':q3o' => $values['q3_other'],
-]);
+try {
+    $stmt->execute([
+        ':created_at' => gmdate('Y-m-d H:i:s'),
+        ':lang' => $lang,
+        ':email' => $email,
+        ':q1c1' => $values['q1_1'], ':q1c2' => $values['q1_2'], ':q1o' => $values['q1_other'],
+        ':q2c1' => $values['q2_1'], ':q2c2' => $values['q2_2'], ':q2o' => $values['q2_other'],
+        ':q3c1' => $values['q3_1'], ':q3c2' => $values['q3_2'], ':q3o' => $values['q3_other'],
+    ]);
+} catch (PDOException $e) {
+    // Race-condition fallback: two submissions with the same email arrived
+    // at nearly the same time and both passed the SELECT check above --
+    // the unique index catches it here instead.
+    render_survey_page([[
+        'en' => 'This email address has already submitted a response. Each participant may only submit once.',
+        'ko' => '이미 제출된 이메일 주소입니다. 참가자당 1회만 제출할 수 있습니다.',
+    ]], $_POST);
+    exit;
+}
 
 render_thanks_page();
 

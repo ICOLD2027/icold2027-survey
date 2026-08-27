@@ -142,6 +142,33 @@ function fetch_other_texts(PDO $pdo, string $column): array
             <?php endif; ?>
         </div>
     <?php endforeach; ?>
+
+    <div class="admin-q-card">
+        <h2>Submitted emails (<?= $totalResponses ?>)</h2>
+        <?php
+        $emailRows = $pdo->query('SELECT id, created_at, email FROM responses ORDER BY id DESC')->fetchAll(PDO::FETCH_ASSOC);
+        ?>
+        <?php if (empty($emailRows)): ?>
+            <p style="color:var(--text-muted); font-size:13px;">No responses yet.</p>
+        <?php else: ?>
+        <div class="table-scroll">
+            <table class="raw-table">
+                <thead>
+                    <tr><th>#</th><th>Submitted (UTC)</th><th>Email</th></tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($emailRows as $row): ?>
+                    <tr>
+                        <td><?= (int)$row['id'] ?></td>
+                        <td><?= htmlspecialchars((string)$row['created_at'], ENT_QUOTES, 'UTF-8') ?></td>
+                        <td><?= htmlspecialchars((string)$row['email'], ENT_QUOTES, 'UTF-8') ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+        <?php endif; ?>
+    </div>
 </div>
 </body>
 </html>

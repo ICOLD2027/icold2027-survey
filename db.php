@@ -13,6 +13,14 @@ function survey_migrate(PDO $pdo): void
     } catch (PDOException $e) {
         // Column already exists on a previously-created table -- fine.
     }
+
+    try {
+        $pdo->exec('CREATE UNIQUE INDEX IF NOT EXISTS idx_responses_email ON responses (LOWER(email))');
+    } catch (PDOException $e) {
+        // Best-effort: if leftover duplicate emails from before this feature
+        // block the unique index, submit.php's own duplicate check still
+        // catches new duplicates going forward.
+    }
 }
 
 function survey_db(): PDO

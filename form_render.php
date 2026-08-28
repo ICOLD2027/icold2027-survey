@@ -138,6 +138,7 @@ function render_survey_page(array $errors, array $old): void
             <span class="lang-en">Your responses are used only for ICOLD 2027 planning purposes and are not shared with third parties.</span>
             <span class="lang-ko">응답은 ICOLD 2027 행사 기획 목적으로만 사용되며 제3자에게 제공되지 않습니다.</span>
         </p>
+        <p class="footer-note">Source: 한국관광데이터랩 「2025 국가별 방한관광시장 분석」</p>
     </form>
 </main>
 

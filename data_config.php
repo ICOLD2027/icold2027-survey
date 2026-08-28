@@ -12,8 +12,6 @@ $SURVEY_QUESTIONS = [
             ['code' => 'b', 'en' => 'Seoul — Myeongdong, Gwanghwamun, Gyeongbokgung Palace, N Seoul Tower', 'ko' => '서울 - 명동, 광화문, 경복궁, N서울타워', 'img' => 'q1-b.jpg'],
             ['code' => 'c', 'en' => 'Busan — Haeundae, Gwangalli, Gamcheon Culture Village', 'ko' => '부산 - 해운대, 광안리, 감천문화마을', 'img' => 'q1-c.jpg'],
             ['code' => 'd', 'en' => 'Gyeonggi — Suwon Hwaseong Fortress, Everland', 'ko' => '경기 - 수원화성, 에버랜드', 'img' => 'q1-d.jpg'],
-            ['code' => 'e', 'en' => 'Jeju — Seongsan Ilchulbong, Olle Trail', 'ko' => '제주 - 성산일출봉, 올레길', 'img' => 'q1-e.jpg'],
-            ['code' => 'f', 'en' => 'Incheon — Songdo Central Park, Chinatown, Wolmido', 'ko' => '인천 - 송도 센트럴파크, 차이나타운, 월미도', 'img' => 'q1-f.jpg'],
         ],
     ],
     [
@@ -24,9 +22,7 @@ $SURVEY_QUESTIONS = [
             ['code' => 'a', 'en' => 'K-Chicken', 'ko' => 'K-치킨', 'img' => 'q2-a.jpg'],
             ['code' => 'b', 'en' => 'Kimchi', 'ko' => '김치', 'img' => 'q2-b.jpg'],
             ['code' => 'c', 'en' => 'Bibimbap', 'ko' => '비빔밥', 'img' => 'q2-c.jpg'],
-            ['code' => 'd', 'en' => 'Bulgogi', 'ko' => '불고기', 'img' => 'q2-d.jpg'],
-            ['code' => 'e', 'en' => 'K-BBQ / Meat (Samgyeopsal, Galbi, etc.)', 'ko' => 'K-바비큐/고기 (삼겹살, 갈비 등)', 'img' => 'q2-e.jpg'],
-            ['code' => 'f', 'en' => 'K-Dessert', 'ko' => 'K-디저트', 'img' => 'q2-f.jpg'],
+            ['code' => 'd', 'en' => 'K-BBQ / Meat (Samgyeopsal, Galbi, etc.)', 'ko' => 'K-바비큐/고기 (삼겹살, 갈비 등)', 'img' => 'q2-e.jpg'],
         ],
     ],
     [

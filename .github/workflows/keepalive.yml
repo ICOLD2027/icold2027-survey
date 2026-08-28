@@ -1,0 +1,13 @@
+name: Keep Render service awake
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping survey site
+        run: curl -sS -o /dev/null -w "HTTP %{http_code}\n" https://icold2027-survey-test.onrender.com/survey

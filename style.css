@@ -109,12 +109,36 @@ main {
     margin-bottom: 10px;
 }
 
+.q-note {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0 0 4px;
+}
+
 .rank-label {
     font-size: 14px;
     font-weight: 700;
     color: var(--navy);
     margin: 18px 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
 }
+
+.rank-label-second {
+    color: #8a6416;
+}
+
+.swatch {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    flex-shrink: 0;
+}
+
+.swatch-first { background: var(--navy); }
+.swatch-second { background: var(--accent); }
 
 .hint {
     font-weight: 400;
@@ -149,7 +173,16 @@ main {
 
 .option-card label:hover { border-color: #b9c4d3; }
 
-.option-card input[type="radio"]:checked + label {
+/* 1순위/2순위 선택 시 서로 다른 색으로 표시 (개선안 반영):
+   1st choice -> navy, 2nd choice -> gold. Matches the admin dashboard's
+   existing "Navy = 1st choice / Gold = 2nd choice" legend. */
+.option-grid-first .option-card input[type="radio"]:checked + label {
+    border-color: var(--navy);
+    box-shadow: 0 0 0 3px rgba(11,37,69,0.22);
+    background: #eef2f7;
+}
+
+.option-grid-second .option-card input[type="radio"]:checked + label {
     border-color: var(--accent);
     box-shadow: 0 0 0 3px rgba(217,154,43,0.25);
 }
@@ -260,6 +293,45 @@ main {
     margin-top: 20px;
     color: var(--navy);
     font-weight: 600;
+}
+
+.recap {
+    text-align: left;
+    margin-top: 22px;
+    border-top: 1px solid var(--border);
+    padding-top: 10px;
+}
+
+.recap-item {
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--border);
+    font-size: 14px;
+}
+
+.recap-item:last-child { border-bottom: none; }
+
+.recap-q {
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+}
+
+.recap-tag {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-right: 6px;
+}
+
+.recap-tag-first { background: #eef2f7; color: var(--navy); }
+.recap-tag-second { background: #fbf1de; color: #8a6416; }
+
+.recap-other {
+    margin-top: 4px;
+    color: var(--text-muted);
+    font-style: italic;
 }
 
 /* Admin */

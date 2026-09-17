@@ -108,9 +108,13 @@ try {
     exit;
 }
 
-render_thanks_page();
+render_thanks_page($values, $email, $SURVEY_QUESTIONS);
 
-function render_thanks_page(): void
+/**
+ * @param array $values   submitted choices/other-text, keyed like "{code}_1", "{code}_2", "{code}_other"
+ * @param array $questions $SURVEY_QUESTIONS (for looking up option labels + question titles)
+ */
+function render_thanks_page(array $values = [], string $email = '', array $questions = []): void
 {
     ?>
 <!doctype html>
@@ -124,7 +128,49 @@ function render_thanks_page(): void
 <body>
 <div class="thanks-wrap">
     <h1>Thank you! / 감사합니다!</h1>
-    <p>Your response has been recorded.<br>응답이 정상적으로 제출되었습니다.</p>
+    <p>
+        <span class="lang-en">Your response has been recorded<?= $email !== '' ? ' for <strong>' . htmlspecialchars($email, ENT_QUOTES, 'UTF-8') . '</strong>' : '' ?>.</span>
+        <span class="lang-ko">응답이 정상적으로 제출되었습니다<?= $email !== '' ? ' (<strong>' . htmlspecialchars($email, ENT_QUOTES, 'UTF-8') . '</strong>)' : '' ?>.</span>
+    </p>
+
+    <?php if (!empty($questions)): ?>
+    <div class="recap">
+        <?php foreach ($questions as $qi => $q): ?>
+            <?php
+            $code = $q['code'];
+            $c1 = $values["{$code}_1"] ?? '';
+            $c2 = $values["{$code}_2"] ?? '';
+            $other = trim((string)($values["{$code}_other"] ?? ''));
+            $opt1 = null; $opt2 = null;
+            foreach ($q['options'] as $o) {
+                if ($o['code'] === $c1) { $opt1 = $o; }
+                if ($o['code'] === $c2) { $opt2 = $o; }
+            }
+            ?>
+            <div class="recap-item">
+                <div class="recap-q">Q<?= $qi + 1 ?>. <span class="lang-en"><?= htmlspecialchars($q['title_en'], ENT_QUOTES, 'UTF-8') ?></span><span class="lang-ko"><?= htmlspecialchars($q['title_ko'], ENT_QUOTES, 'UTF-8') ?></span></div>
+                <?php if ($opt1): ?>
+                <div><span class="recap-tag recap-tag-first">1st / 1순위</span>
+                    <span class="lang-en"><?= htmlspecialchars($opt1['en'], ENT_QUOTES, 'UTF-8') ?></span>
+                    <span class="lang-ko"><?= htmlspecialchars($opt1['ko'], ENT_QUOTES, 'UTF-8') ?></span>
+                </div>
+                <?php endif; ?>
+                <?php if ($opt2): ?>
+                <div><span class="recap-tag recap-tag-second">2nd / 2순위</span>
+                    <span class="lang-en"><?= htmlspecialchars($opt2['en'], ENT_QUOTES, 'UTF-8') ?></span>
+                    <span class="lang-ko"><?= htmlspecialchars($opt2['ko'], ENT_QUOTES, 'UTF-8') ?></span>
+                </div>
+                <?php endif; ?>
+                <?php if ($other !== ''): ?>
+                <div class="recap-other">
+                    <span class="lang-en">Other: </span><span class="lang-ko">기타: </span><?= htmlspecialchars($other, ENT_QUOTES, 'UTF-8') ?>
+                </div>
+                <?php endif; ?>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    <?php endif; ?>
+
     <a class="back-link" href="index.php">&larr; Back / 돌아가기</a>
 </div>
 </body>

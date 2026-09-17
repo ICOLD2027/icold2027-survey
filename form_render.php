@@ -62,12 +62,19 @@ function render_survey_page(array $errors, array $old): void
                 <span class="lang-en"><?= htmlspecialchars($q['title_en'], ENT_QUOTES, 'UTF-8') ?></span>
                 <span class="lang-ko"><?= htmlspecialchars($q['title_ko'], ENT_QUOTES, 'UTF-8') ?></span>
             </h2>
+            <?php if (!empty($q['note_en']) || !empty($q['note_ko'])): ?>
+            <p class="q-note">
+                <span class="lang-en"><?= htmlspecialchars($q['note_en'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
+                <span class="lang-ko"><?= htmlspecialchars($q['note_ko'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
+            </p>
+            <?php endif; ?>
 
-            <div class="rank-label">
+            <div class="rank-label rank-label-first">
+                <span class="swatch swatch-first" aria-hidden="true"></span>
                 <span class="lang-en">1st choice</span><span class="lang-ko">1순위</span>
                 <span class="hint"> — <span class="lang-en">required</span><span class="lang-ko">필수</span></span>
             </div>
-            <div class="option-grid">
+            <div class="option-grid option-grid-first">
                 <?php foreach ($q['options'] as $opt): $fieldName = $q['code'] . '_1'; ?>
                 <div class="option-card">
                     <input type="radio" name="<?= $fieldName ?>" id="<?= $fieldName . '_' . $opt['code'] ?>" value="<?= $opt['code'] ?>"<?= $is_checked($fieldName, $opt['code']) ?>>
@@ -83,11 +90,12 @@ function render_survey_page(array $errors, array $old): void
                 <?php endforeach; ?>
             </div>
 
-            <div class="rank-label">
+            <div class="rank-label rank-label-second">
+                <span class="swatch swatch-second" aria-hidden="true"></span>
                 <span class="lang-en">2nd choice</span><span class="lang-ko">2순위</span>
                 <span class="hint"> — <span class="lang-en">optional</span><span class="lang-ko">선택</span></span>
             </div>
-            <div class="option-grid">
+            <div class="option-grid option-grid-second">
                 <?php foreach ($q['options'] as $opt): $fieldName = $q['code'] . '_2'; ?>
                 <div class="option-card">
                     <input type="radio" name="<?= $fieldName ?>" id="<?= $fieldName . '_' . $opt['code'] ?>" value="<?= $opt['code'] ?>"<?= $is_checked($fieldName, $opt['code']) ?>>

@@ -10,8 +10,8 @@
 //
 // NOTE: options[].img for 'DMZ', 'Templestay', and 'Art museum / gallery'
 // (images/q1-dmz.jpg, images/q3-templestay.jpg, images/q3-gallery.jpg) use
-// real photos sourced from Wikimedia Commons under CC BY / CC BY-SA licenses.
-// See IMAGE_CREDITS.md in the repo root for attribution details.
+// real photos under CC BY / CC BY-SA (Wikimedia Commons) or the Pexels
+// License. See IMAGE_CREDITS.md in the repo root for attribution details.
 // Everything else reuses the site's existing real photos.
 
 $SURVEY_QUESTIONS = [

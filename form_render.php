@@ -69,44 +69,34 @@ function render_survey_page(array $errors, array $old): void
             </p>
             <?php endif; ?>
 
-            <div class="rank-label rank-label-first">
-                <span class="swatch swatch-first" aria-hidden="true"></span>
-                <span class="lang-en">1st choice</span><span class="lang-ko">1순위</span>
-                <span class="hint"> — <span class="lang-en">required</span><span class="lang-ko">필수</span></span>
+            <div class="rank-legend">
+                <span class="legend-chip legend-chip-first">1st</span>
+                <span class="legend-text"><span class="lang-en">1st click = 1st choice</span><span class="lang-ko">첫 번째 클릭 = 1순위</span></span>
+                <span class="legend-chip legend-chip-second">2nd</span>
+                <span class="legend-text"><span class="lang-en">2nd click = 2nd choice</span><span class="lang-ko">두 번째 클릭 = 2순위</span></span>
+                <span class="legend-text legend-text-muted"><span class="lang-en">Click again to deselect</span><span class="lang-ko">다시 클릭 = 선택 해제</span></span>
             </div>
-            <div class="option-grid option-grid-first">
-                <?php foreach ($q['options'] as $opt): $fieldName = $q['code'] . '_1'; ?>
-                <div class="option-card">
-                    <input type="radio" name="<?= $fieldName ?>" id="<?= $fieldName . '_' . $opt['code'] ?>" value="<?= $opt['code'] ?>"<?= $is_checked($fieldName, $opt['code']) ?>>
-                    <label for="<?= $fieldName . '_' . $opt['code'] ?>">
-                        <img src="images/<?= htmlspecialchars($opt['img'], ENT_QUOTES, 'UTF-8') ?>" alt="" loading="lazy">
-                        <div class="option-thumb-text">
-                            <span class="option-code"><?= strtoupper($opt['code']) ?></span>
-                            <span class="lang-en"><?= htmlspecialchars($opt['en'], ENT_QUOTES, 'UTF-8') ?></span>
-                            <span class="lang-ko"><?= htmlspecialchars($opt['ko'], ENT_QUOTES, 'UTF-8') ?></span>
-                        </div>
-                    </label>
-                </div>
-                <?php endforeach; ?>
+            <div class="rank-hint" id="<?= $q['code'] ?>_hint">
+                <span class="lang-en">Click a card to select your 1st choice.</span>
+                <span class="lang-ko">카드를 클릭하면 1순위로 선택됩니다.</span>
+                <span class="rank-hint-required"><span class="lang-en"> (1st required, 2nd optional)</span><span class="lang-ko"> (1순위 필수 · 2순위 선택)</span></span>
             </div>
-
-            <div class="rank-label rank-label-second">
-                <span class="swatch swatch-second" aria-hidden="true"></span>
-                <span class="lang-en">2nd choice</span><span class="lang-ko">2순위</span>
-                <span class="hint"> — <span class="lang-en">optional</span><span class="lang-ko">선택</span></span>
-            </div>
-            <div class="option-grid option-grid-second">
-                <?php foreach ($q['options'] as $opt): $fieldName = $q['code'] . '_2'; ?>
-                <div class="option-card">
-                    <input type="radio" name="<?= $fieldName ?>" id="<?= $fieldName . '_' . $opt['code'] ?>" value="<?= $opt['code'] ?>"<?= $is_checked($fieldName, $opt['code']) ?>>
-                    <label for="<?= $fieldName . '_' . $opt['code'] ?>">
-                        <img src="images/<?= htmlspecialchars($opt['img'], ENT_QUOTES, 'UTF-8') ?>" alt="" loading="lazy">
-                        <div class="option-thumb-text">
-                            <span class="option-code"><?= strtoupper($opt['code']) ?></span>
-                            <span class="lang-en"><?= htmlspecialchars($opt['en'], ENT_QUOTES, 'UTF-8') ?></span>
-                            <span class="lang-ko"><?= htmlspecialchars($opt['ko'], ENT_QUOTES, 'UTF-8') ?></span>
-                        </div>
-                    </label>
+            <div class="option-grid" data-field="<?= $q['code'] ?>">
+                <input type="hidden" name="<?= $q['code'] ?>_1" id="<?= $q['code'] ?>_1_hidden" value="<?= $old_val($q['code'] . '_1') ?>">
+                <input type="hidden" name="<?= $q['code'] ?>_2" id="<?= $q['code'] ?>_2_hidden" value="<?= $old_val($q['code'] . '_2') ?>">
+                <?php foreach ($q['options'] as $opt):
+                    $isFirst = ($old[$q['code'] . '_1'] ?? '') === $opt['code'];
+                    $isSecond = ($old[$q['code'] . '_2'] ?? '') === $opt['code'];
+                    $cardClass = 'option-card' . ($isFirst ? ' is-first' : ($isSecond ? ' is-second' : ''));
+                ?>
+                <div class="<?= $cardClass ?>" data-code="<?= $opt['code'] ?>" tabindex="0" role="button" aria-pressed="<?= ($isFirst || $isSecond) ? 'true' : 'false' ?>">
+                    <img src="images/<?= htmlspecialchars($opt['img'], ENT_QUOTES, 'UTF-8') ?>" alt="" loading="lazy">
+                    <span class="rank-badge"><?= $isFirst ? '1st' : ($isSecond ? '2nd' : '') ?></span>
+                    <div class="option-thumb-text">
+                        <span class="option-code"><?= strtoupper($opt['code']) ?></span>
+                        <span class="lang-en"><?= htmlspecialchars($opt['en'], ENT_QUOTES, 'UTF-8') ?></span>
+                        <span class="lang-ko"><?= htmlspecialchars($opt['ko'], ENT_QUOTES, 'UTF-8') ?></span>
+                    </div>
                 </div>
                 <?php endforeach; ?>
             </div>
@@ -159,19 +149,80 @@ function render_survey_page(array $errors, array $old): void
     enRadio.addEventListener('change', function () { field.value = 'en'; });
     koRadio.addEventListener('change', function () { field.value = 'ko'; });
 
-    // Prevent picking the same option for 1st and 2nd choice (soft UX guard; server re-validates).
-    document.querySelectorAll('.question-card').forEach(function (card) {
-        var radios = card.querySelectorAll('input[type=radio]');
-        radios.forEach(function (r) {
-            r.addEventListener('change', function () {
-                var isFirst = /_1$/.test(r.name);
-                var pairName = isFirst ? r.name.replace(/_1$/, '_2') : r.name.replace(/_2$/, '_1');
-                var pairSame = card.querySelector('input[name="' + pairName + '"][value="' + r.value + '"]');
-                if (pairSame && pairSame.checked) {
-                    pairSame.checked = false;
+    // Single-row 1st/2nd choice picker: click a card once for 1st choice,
+    // click a different card for 2nd choice, click a selected card again to
+    // deselect it, and click a third card to replace the 2nd choice.
+    document.querySelectorAll('.option-grid[data-field]').forEach(function (grid) {
+        var field = grid.getAttribute('data-field');
+        var hidden1 = document.getElementById(field + '_1_hidden');
+        var hidden2 = document.getElementById(field + '_2_hidden');
+        var hint = document.getElementById(field + '_hint');
+        var cards = grid.querySelectorAll('.option-card');
+
+        function updateHint() {
+            if (!hint) { return; }
+            var en = hint.querySelector('.lang-en');
+            var ko = hint.querySelector('.lang-ko');
+            if (!hidden1.value) {
+                en.textContent = 'Click a card to select your 1st choice.';
+                ko.textContent = '카드를 클릭하면 1순위로 선택됩니다.';
+            } else if (!hidden2.value) {
+                en.textContent = 'Click another card to select your 2nd choice (optional).';
+                ko.textContent = '다른 카드를 클릭하면 2순위로 선택됩니다 (선택 사항).';
+            } else {
+                en.textContent = 'Click a selected card again to change your choices.';
+                ko.textContent = '선택된 카드를 다시 클릭하면 선택이 바뀌거나 해제됩니다.';
+            }
+        }
+
+        function render() {
+            cards.forEach(function (card) {
+                var code = card.getAttribute('data-code');
+                var badge = card.querySelector('.rank-badge');
+                card.classList.remove('is-first', 'is-second');
+                if (hidden1.value !== '' && code === hidden1.value) {
+                    card.classList.add('is-first');
+                    card.setAttribute('aria-pressed', 'true');
+                    badge.textContent = '1st';
+                } else if (hidden2.value !== '' && code === hidden2.value) {
+                    card.classList.add('is-second');
+                    card.setAttribute('aria-pressed', 'true');
+                    badge.textContent = '2nd';
+                } else {
+                    card.setAttribute('aria-pressed', 'false');
+                    badge.textContent = '';
+                }
+            });
+            updateHint();
+        }
+
+        function handleClick(card) {
+            var code = card.getAttribute('data-code');
+            if (hidden1.value === code) {
+                hidden1.value = '';
+            } else if (hidden2.value === code) {
+                hidden2.value = '';
+            } else if (hidden1.value === '') {
+                hidden1.value = code;
+            } else if (hidden2.value === '') {
+                hidden2.value = code;
+            } else {
+                hidden2.value = code;
+            }
+            render();
+        }
+
+        cards.forEach(function (card) {
+            card.addEventListener('click', function () { handleClick(card); });
+            card.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+                    e.preventDefault();
+                    handleClick(card);
                 }
             });
         });
+
+        render();
     });
 })();
 </script>

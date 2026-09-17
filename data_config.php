@@ -9,10 +9,10 @@
 //     (시티투어 / 동반자투어 / 기술투어와 연계)
 //
 // NOTE: options[].img for 'DMZ', 'Templestay', and 'Art museum / gallery'
-// point to placeholder illustrations (images/q1-dmz.jpg, images/q3-templestay.jpg,
-// images/q3-gallery.jpg) generated locally since no source photo was provided.
-// Swap these three files for real photos before the survey goes live --
-// everything else reuses the site's existing real photos.
+// (images/q1-dmz.jpg, images/q3-templestay.jpg, images/q3-gallery.jpg) use
+// real photos sourced from Wikimedia Commons under CC BY / CC BY-SA licenses.
+// See IMAGE_CREDITS.md in the repo root for attribution details.
+// Everything else reuses the site's existing real photos.
 
 $SURVEY_QUESTIONS = [
     [

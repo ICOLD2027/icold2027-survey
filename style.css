@@ -163,28 +163,67 @@ main {
 
 .option-card label {
     display: block;
+    position: relative;
     cursor: pointer;
     border: 2px solid var(--border);
     border-radius: 10px;
     overflow: hidden;
     background: #fff;
-    transition: border-color .15s, box-shadow .15s, transform .1s;
+    transition: border-color .15s ease, box-shadow .15s ease, transform .12s ease, background-color .15s ease;
 }
 
 .option-card label:hover { border-color: #b9c4d3; }
 
-/* 1순위/2순위 선택 시 서로 다른 색으로 표시 (개선안 반영):
-   1st choice -> navy, 2nd choice -> gold. Matches the admin dashboard's
-   existing "Navy = 1st choice / Gold = 2nd choice" legend. */
+/* 1순위/2순위 선택 시 눈에 띄게 구분되도록 (개선안 v2 반영):
+   1st choice -> navy, 2nd choice -> gold. 색상만으로는 구분이 약하다는 피드백에 따라
+   ① 배경 틴트를 더 진하게, ② 카드를 살짝 들어올리는 그림자 효과, ③ 우상단에 1/2 숫자
+   배지를 추가해 색약/저시력 사용자도 구분할 수 있도록 이중으로 표시한다. 관리자
+   대시보드의 기존 "Navy = 1st choice / Gold = 2nd choice" 범례와 색상을 맞췄다. */
+.option-grid-first .option-card input[type="radio"]:checked + label,
+.option-grid-second .option-card input[type="radio"]:checked + label {
+    border-width: 3px;
+    transform: translateY(-3px);
+}
+
 .option-grid-first .option-card input[type="radio"]:checked + label {
     border-color: var(--navy);
-    box-shadow: 0 0 0 3px rgba(11,37,69,0.22);
-    background: #eef2f7;
+    box-shadow: 0 8px 16px rgba(11,37,69,0.30), 0 0 0 3px rgba(11,37,69,0.30);
+    background: #dbe4f0;
 }
 
 .option-grid-second .option-card input[type="radio"]:checked + label {
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(217,154,43,0.25);
+    box-shadow: 0 8px 16px rgba(217,154,43,0.32), 0 0 0 3px rgba(217,154,43,0.38);
+    background: #fbecce;
+}
+
+/* 선택 순위를 숫자 배지로도 표시 (색상 인지가 어려운 사용자를 위한 보조 신호) */
+.option-grid-first .option-card input[type="radio"]:checked + label::after,
+.option-grid-second .option-card input[type="radio"]:checked + label::after {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 25px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    z-index: 1;
+}
+
+.option-grid-first .option-card input[type="radio"]:checked + label::after {
+    content: "1";
+    background: var(--navy);
+    color: #fff;
+}
+
+.option-grid-second .option-card input[type="radio"]:checked + label::after {
+    content: "2";
+    background: var(--accent);
+    color: #1c2733;
 }
 
 .option-card input[type="radio"]:focus-visible + label {

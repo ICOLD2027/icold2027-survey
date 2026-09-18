@@ -27,7 +27,10 @@ function render_survey_page(array $errors, array $old): void
 <input type="radio" id="lang-ko" name="lang-toggle">
 
 <header class="site-header">
-    <div class="eyebrow">ICOLD 2027 · Daejeon, Korea</div>
+    <div class="eyebrow">
+        <span class="lang-en">ICOLD 2027 · The 95th ICOLD Annual Meeting · Daejeon, South Korea</span>
+        <span class="lang-ko">ICOLD 2027 · 2027년 국제대댐회 제95차 연차회의 · 대한민국 대전</span>
+    </div>
     <h1>
         <span class="lang-en">Visitor Interest Survey</span>
         <span class="lang-ko">참가자 관심사 설문조사</span>

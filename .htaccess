@@ -7,6 +7,23 @@ RewriteEngine On
 RewriteRule ^survey/?$ index.php [L]
 RewriteRule ^admin/survey-results/?$ admin/index.php [L]
 
+# The pages above use links/paths relative to their alias (style.css,
+# images/*, submit.php from /survey/; index.php, export.php from
+# /admin/survey-results/; ../style.css from /admin/survey-results/, which
+# lands one level up at /admin/<file>). Route those through to the file's
+# real location so the alias doesn't break relative links.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^survey/(.+)$ $1 [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^admin/survey-results/(.+)$ admin/$1 [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^admin/(.+)$ $1 [L]
+
 # Defense in depth: block direct access to internal PHP includes even if
 # PHP execution were ever misconfigured on this host.
 <FilesMatch "^(admin_config|data_config|db|form_render)\.php$">

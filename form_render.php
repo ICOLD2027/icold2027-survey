@@ -28,8 +28,11 @@ function render_survey_page(array $errors, array $old): void
 
 <header class="site-header">
     <div class="eyebrow">
-        <span class="lang-en">ICOLD 2027 · The 95th ICOLD Annual Meeting · Daejeon, South Korea</span>
-        <span class="lang-ko">ICOLD 2027 · 2027년 국제대댐회 제95차 연차회의 · 대한민국 대전</span>
+        <div class="eyebrow-title">ICOLD 2027</div>
+        <div class="eyebrow-subtitle">
+            <span class="lang-en">The 95th ICOLD Annual Meeting<br>Daejeon, South Korea</span>
+            <span class="lang-ko">2027년 국제대댐회 제95차 연차회의<br>대한민국 대전</span>
+        </div>
     </div>
     <h1>
         <span class="lang-en">Visitor Interest Survey</span>

@@ -28,16 +28,30 @@ body {
 }
 
 .site-header .eyebrow {
-    letter-spacing: 0.12em;
-    font-size: 13px;
-    color: #b7c6dd;
-    text-transform: uppercase;
-    margin-bottom: 6px;
+    margin-bottom: 16px;
+}
+
+.eyebrow-title {
+    font-size: 44px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+    color: #ffffff;
+}
+
+.eyebrow-subtitle {
+    margin-top: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #bcd0ea;
 }
 
 .site-header h1 {
     margin: 0;
-    font-size: 26px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.18);
+    font-size: 24px;
 }
 
 .site-header p {

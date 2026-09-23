@@ -85,7 +85,7 @@ function render_survey_page(array $errors, array $old): void
             <div class="rank-hint" id="<?= $q['code'] ?>_hint">
                 <span class="lang-en">Click a card to select your 1st choice.</span>
                 <span class="lang-ko">카드를 클릭하면 1순위로 선택됩니다.</span>
-                <span class="rank-hint-required"><span class="lang-en"> (1st required, 2nd optional)</span><span class="lang-ko"> (1순위 필수 · 2순위 선택)</span></span>
+                <span class="rank-hint-required"><span class="lang-en"> (1st and 2nd choice both required)</span><span class="lang-ko"> (1순위·2순위 모두 필수)</span></span>
             </div>
             <div class="option-grid" data-field="<?= $q['code'] ?>">
                 <input type="hidden" name="<?= $q['code'] ?>_1" id="<?= $q['code'] ?>_1_hidden" value="<?= $old_val($q['code'] . '_1') ?>">
@@ -173,8 +173,8 @@ function render_survey_page(array $errors, array $old): void
                 en.textContent = 'Click a card to select your 1st choice.';
                 ko.textContent = '카드를 클릭하면 1순위로 선택됩니다.';
             } else if (!hidden2.value) {
-                en.textContent = 'Click another card to select your 2nd choice (optional).';
-                ko.textContent = '다른 카드를 클릭하면 2순위로 선택됩니다 (선택 사항).';
+                en.textContent = 'Click another card to select your 2nd choice.';
+                ko.textContent = '다른 카드를 클릭하면 2순위로 선택됩니다.';
             } else {
                 en.textContent = 'Click a selected card again to change your choices.';
                 ko.textContent = '선택된 카드를 다시 클릭하면 선택이 바뀌거나 해제됩니다.';

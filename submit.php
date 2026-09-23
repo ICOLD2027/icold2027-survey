@@ -38,7 +38,11 @@ foreach ($SURVEY_QUESTIONS as $q) {
         $choice1 = '';
     }
 
-    if ($choice2 !== '' && !in_array($choice2, $validCodes, true)) {
+    if ($choice2 === '' || !in_array($choice2, $validCodes, true)) {
+        $errors[] = [
+            'en' => 'Please select a 2nd choice for question "' . $q['title_en'] . '".',
+            'ko' => '"' . $q['title_ko'] . '" 문항의 2순위를 선택해 주세요.',
+        ];
         $choice2 = '';
     }
 
